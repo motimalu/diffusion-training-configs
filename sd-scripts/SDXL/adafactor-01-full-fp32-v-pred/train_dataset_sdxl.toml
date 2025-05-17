@@ -1,0 +1,14 @@
+[general]
+resolution = 1024
+caption_extension = ".txt"
+shuffle_caption = false
+enable_bucket = true
+min_bucket_reso = 512
+max_bucket_reso = 2048
+bucket_reso_steps = 32
+
+[[datasets]]
+
+  [[datasets.subsets]]
+  image_dir = "/mnt/c/data/collection_name"
+  num_repeats = 1

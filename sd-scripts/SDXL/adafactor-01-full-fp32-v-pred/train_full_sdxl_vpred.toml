@@ -1,0 +1,50 @@
+[model_arguments]
+v2 = false
+sdxl = true
+v_parameterization = true
+pretrained_model_name_or_path = "/mnt/c/models/Stable-diffusion/noobaiXLNAIXL_vPred10Version.safetensors"
+
+[optimizer_arguments]
+optimizer_type = "Adafactor"
+optimizer_args = [ "scale_parameter=False", "relative_step=False", "warmup_init=False" ]
+learning_rate = 1e-5
+lr_scheduler = "constant_with_warmup"
+lr_warmup_steps = 100
+max_grad_norm = 0.0
+train_text_encoder = false
+adaptive_noise_scale = 0
+min_snr_gamma = 0
+
+[dataset_arguments]
+cache_latents = true
+cache_latents_to_disk = true
+debug_dataset = false
+
+[training_arguments]
+save_n_epoch_ratio = 0
+train_batch_size = 5
+mem_eff_attn = false
+max_data_loader_n_workers = 6
+persistent_data_loader_workers = true
+gradient_checkpointing = true
+gradient_accumulation_steps = 1
+mixed_precision = "no"
+save_precision = "fp16"
+logging_dir = "/mnt/d/logs"
+log_prefix = "last"
+xformers = true
+sdpa = false
+noise_offset = 0.0357
+seed = 1234
+save_model_as = "safetensors"
+save_state = false
+
+[dreambooth_arguments]
+prior_loss_weight = 1.0
+
+[sample_prompt_arguments]
+
+[saving_arguments]
+metadata_author = "motimalu"
+output_dir = "/mnt/d/model_output"
+output_name = "noobai-vpred-1.0-name-fp32-b5lr1e-5"
