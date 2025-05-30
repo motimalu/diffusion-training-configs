@@ -41,6 +41,14 @@ def load_state_dict(file_name, dtype):
 
 
 def save_to_file(file_name, model, state_dict, dtype, metadata):
+    def str_to_dtype(p):
+        if p == "float":
+            return torch.float
+        if p == "fp16":
+            return torch.float16
+        if p == "bf16":
+            return torch.bfloat16
+        return None
     if dtype is not None:
         for key in list(state_dict.keys()):
             if type(state_dict[key]) == torch.Tensor:
