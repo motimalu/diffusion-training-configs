@@ -7,11 +7,11 @@ pretrained_model_name_or_path = "/mnt/c/models/Stable-diffusion/noobaiXLNAIXL_vP
 [optimizer_arguments]
 optimizer_type = "Adafactor"
 optimizer_args = [ "scale_parameter=False", "relative_step=False", "warmup_init=False" ]
-learning_rate = 1e-5
+learning_rate = 6e-6
 lr_scheduler = "constant_with_warmup"
 lr_warmup_steps = 100
 max_grad_norm = 0.0
-train_text_encoder = false
+train_text_encoder = true
 adaptive_noise_scale = 0
 min_snr_gamma = 0
 
@@ -22,7 +22,7 @@ debug_dataset = false
 
 [training_arguments]
 save_n_epoch_ratio = 0
-train_batch_size = 5
+train_batch_size = 4
 mem_eff_attn = false
 max_data_loader_n_workers = 6
 persistent_data_loader_workers = true
@@ -47,4 +47,4 @@ prior_loss_weight = 1.0
 [saving_arguments]
 metadata_author = "motimalu"
 output_dir = "/mnt/d/model_output"
-output_name = "noobai-vpred-1.0-name-fp32-b5lr1e-5"
+output_name = "noobai-vpred-1.0-name-fp32-b4lr6e-6"

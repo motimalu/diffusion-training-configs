@@ -6,6 +6,8 @@ accelerate launch --num_cpu_threads_per_process=8 "./sdxl_train.py" \
   --zero_terminal_snr \
   --v_parameterization \
   --fused_backward_pass \
-  --learning_rate=1e-5 \
+  --learning_rate=6e-6 \
+  --learning_rate_te1=2e-6 \
+  --learning_rate_te2=2e-6\
   --max_train_epochs=50 \
   --save_every_n_epochs=10
