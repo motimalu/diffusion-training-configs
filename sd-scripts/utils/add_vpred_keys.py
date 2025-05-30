@@ -2,12 +2,11 @@
 
 # Usage:
 # Copy to kohya-ss/sd-scripts directory
-# Run with:
+# Run with
 # 
-# source venv/bin/activate
-# accelerate launch "./add_vpred_keys.py" ^
-# --sd-model="/directory/modename.safetensors" ^
-# --save-to="/directory/modelname-update.safetensors" ^
+# accelerate launch "add_vpred_keys.py" \
+# --sd-model="/directory/modename.safetensors" \
+# --save-to="/directory/modelname-update.safetensors" \
 # --save-precision="fp16"
 
 import argparse
