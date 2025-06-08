@@ -2,7 +2,7 @@
 v2 = false
 sdxl = true
 v_parameterization = true
-pretrained_model_name_or_path = "/workspace/noobaiXLNAIXL_vPred10Version.safetensors"
+pretrained_model_name_or_path = "/workspace/NoobAI-XL-Vpred-v1.0.safetensors"
 
 [optimizer_arguments]
 optimizer_type = "Adafactor"
