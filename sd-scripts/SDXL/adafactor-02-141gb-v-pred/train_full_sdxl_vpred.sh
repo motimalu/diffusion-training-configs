@@ -9,5 +9,5 @@ accelerate launch --num_cpu_threads_per_process=8 "./sdxl_train.py" \
   --learning_rate=2.1e-4 \
   --learning_rate_te1=9e-5 \
   --learning_rate_te2=9e-5\
-  --max_train_epochs=50 \
-  --save_every_n_epochs=10
+  --max_train_epochs=5 \
+  --save_every_n_epochs=1
