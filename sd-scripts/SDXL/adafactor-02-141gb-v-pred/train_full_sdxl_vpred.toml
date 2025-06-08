@@ -7,7 +7,7 @@ pretrained_model_name_or_path = "/workspace/NoobAI-XL-Vpred-v1.0.safetensors"
 [optimizer_arguments]
 optimizer_type = "Adafactor"
 optimizer_args = [ "scale_parameter=False", "relative_step=False", "warmup_init=False" ]
-learning_rate = 2.1e-4
+learning_rate = 1.7e-4
 lr_scheduler = "constant_with_warmup"
 lr_warmup_steps = 100
 max_grad_norm = 0.0
@@ -22,7 +22,7 @@ debug_dataset = false
 
 [training_arguments]
 save_n_epoch_ratio = 0
-train_batch_size = 150
+train_batch_size = 120
 mem_eff_attn = false
 max_data_loader_n_workers = 6
 persistent_data_loader_workers = true
