@@ -11,3 +11,7 @@ bucket_reso_steps = 32
 
   [[datasets.subsets]]
   image_dir = "/workspace/collection_name"
+
+  [[datasets.subsets]]
+  is_reg = true
+  image_dir = "/workspace/regularlization"
