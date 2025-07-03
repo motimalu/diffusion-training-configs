@@ -4,10 +4,11 @@
 # Copy to kohya-ss/sd-scripts directory
 # Run with
 # 
+# source venv/bin/activate \
 # accelerate launch "add_vpred_keys.py" \
-# --sd-model="/directory/modename.safetensors" \
-# --save-to="/directory/modelname-update.safetensors" \
-# --save-precision="fp16"
+# --sd_model="/directory/modename.safetensors" \
+# --save_to="/directory/modelname-update.safetensors" \
+# --save_precision="fp16"
 
 import argparse
 import os
@@ -39,15 +40,16 @@ def load_state_dict(file_name, dtype):
     return sd, metadata
 
 
+def str_to_dtype(p):
+    if p == "float":
+        return torch.float
+    if p == "fp16":
+        return torch.float16
+    if p == "bf16":
+        return torch.bfloat16
+    return None
+
 def save_to_file(file_name, model, state_dict, dtype, metadata):
-    def str_to_dtype(p):
-        if p == "float":
-            return torch.float
-        if p == "fp16":
-            return torch.float16
-        if p == "bf16":
-            return torch.bfloat16
-        return None
     if dtype is not None:
         for key in list(state_dict.keys()):
             if type(state_dict[key]) == torch.Tensor:
@@ -60,6 +62,7 @@ def save_to_file(file_name, model, state_dict, dtype, metadata):
 
 
 def add_vpred_keys(args):
+    save_to = args.save_to
     save_dtype = str_to_dtype(args.save_precision)
     if save_dtype is None:
         save_dtype = torch.float16
