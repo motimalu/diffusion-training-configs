@@ -14,7 +14,7 @@ import argparse
 import os
 import torch
 from safetensors.torch import load_file, save_file
-from library import sai_model_spec, train_util
+from library import train_util
 import library.model_util as model_util
 from library.utils import setup_logging
 setup_logging()
