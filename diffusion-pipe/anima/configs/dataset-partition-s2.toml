@@ -1,0 +1,42 @@
+resolutions = [1024, 1280, 1536]
+
+enable_ar_bucket = true
+min_ar = 0.5
+max_ar = 2.0
+num_ar_buckets = 9
+
+# Total images = 16106
+
+# 16106 images, 8 repeats from captions.json, 3 resolutions
+
+# 16106*8 128848 samples/resolution/epoch
+
+# 3521+4533+6945 = 14999 steps/epoch
+
+# 1024 Resolution: 7041*8 = 56328 samples / 16 batch size = 3521 steps
+# - iter time (s): 6.482*3521 = 6.34 hr / epoch
+
+# 1280 Resolution: (2120+6945)*8 = 72520 samples / 16 batch size = 4533 steps
+# - iter time (s): 8.983*4533 = 11.31 hr / epoch
+
+# 1536 Resolution: 6945*8 = 55560 samples / 8 batch size = 6945 steps
+# - iter time (s): 11.265*6945 = 21.73 hr / epoch
+
+# Total 6.34+11.31+21.73 = 39.38 hr/epoch, max VRAM utilization ~65 GB
+
+# Total Samples seen(unbatched steps): ~553,224
+
+# 7041 entries
+[[directory]]
+path = '/mnt/d/training_data/1_collection_name3/1024x1024'
+resolutions = [1024]
+
+# 2120 entries
+[[directory]]
+path = '/mnt/d/training_data/1_collection_name3/1280x1280'
+resolutions = [1280]
+
+# 6945 entries
+[[directory]]
+path = '/mnt/d/training_data/1_collection_name3/1536x1536'
+resolutions = [1280, 1536]

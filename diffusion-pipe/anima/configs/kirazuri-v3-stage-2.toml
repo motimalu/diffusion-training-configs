@@ -1,0 +1,47 @@
+# trained using diffusion-pipe commit b0aa4f1e03169f3280c8518d37570a448420f8be
+# NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" NCCL_CUMEM_ENABLE="0" deepspeed --num_gpus=1 train.py --deepspeed --config kirazuri-v3-stage-2.toml
+
+output_dir = '/mnt/d/anima/training_output/kirazuri-anima-3-s2'
+
+dataset = 'dataset-partition-s2.toml'
+
+# training settings
+epochs = 3
+# Per-resolution batch sizes
+micro_batch_size_per_gpu = [[1024, 16], [1280, 16], [1536, 8]]
+pipeline_stages = 1
+gradient_accumulation_steps = 1
+gradient_clipping = 1
+warmup_steps = 1500
+lr_scheduler = 'cosine'
+
+# misc settings
+save_every_n_epochs = 1
+checkpoint_every_n_epochs = 1
+activation_checkpointing = true
+
+partition_method = 'parameters'
+
+save_dtype = 'bfloat16'
+caching_batch_size = 4
+map_num_proc = 8
+steps_per_print = 1
+compile = true
+
+[model]
+type = 'anima'
+transformer_path = '/mnt/c/models/diffusion_models/anima-kirazuri-v3-s1-e2.safetensors'
+vae_path = '/mnt/c/models/vae/qwen_image_vae.safetensors'
+llm_path = '/mnt/c/models/text_encoders/qwen_3_06b_base.safetensors'
+dtype = 'bfloat16'
+llm_adapter_lr = 0
+flux_shift = true
+multiscale_loss_weight = 0.5
+sigmoid_scale = 1.3
+
+[optimizer]
+type = 'adamw_optimi'
+lr = 3e-6
+betas = [0.9, 0.99]
+weight_decay = 0.01
+eps = 1e-8
