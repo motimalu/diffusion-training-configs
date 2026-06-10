@@ -135,6 +135,10 @@ Images from Booru data sources have their full tags preserved.
 
 SmilingWolf/wd-eva02-large-tagger-v3 was used for additional image Booru style tagging.
 
+Dataset tags are also used to generate an autosuggest csv file with [generate-csv-autosuggest.py](diffusion-pipe/anima/utils/generate-csv-autosuggest.py).
+
+This output file can be used in ComfyUI with the [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus) extension for automatic completions for tags that the model has learned in the prompt.
+
 ### Natural language captioning
 
 Booru style tags and metadata context are used to provide grounding for natural language description generation.
