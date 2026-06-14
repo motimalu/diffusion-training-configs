@@ -9,7 +9,7 @@ Kirazuri (Anima) 3.0 is a full fine-tune of the [Anima Base v1.0 model by Circle
 
 ## Preamble / Disclaimers
 
-The purpose of this article is for transparency in sharing an up-to-date overview of the training methods at the time of this writing training methods employed, it is not intended to be a guide or indicative of best practices.
+The purpose of this article is for transparency in sharing an up-to-date overview of the training methods at the time of this writing, it is not intended to be a guide or indicative of best practices.
 
 For reflection and error checking purposes, this article is not written with the assistance of a LLM.
 
@@ -79,7 +79,7 @@ The Kirazuri (Anima) model is produced in an individual hobbyist capacity with n
 
 The dataset used to train this model includes almost all datasets curated for previous full fine-tunes and various LoRA and over several years, starting when tagging and data storage practices were improved in December 2024.
 
-These are all available on the CivitAI account posting this article, so they should also serve as a good reference of the models capabilities in terms of what is trained.
+These are all available on the [CivitAI account](https://civitai.red/user/motimalu) posting this article, so they should also serve as a good reference of the models capabilities in terms of what is trained.
 
 ### Methodology of dataset preparation
 
@@ -91,17 +91,16 @@ A huge amount of data is not really necessary for learning additional individual
 
 Roughly one in one hundred images assessed for training a given purpose like the above may be included in the total datasets curation.
 
-While the dataset cutoff is 2026/05/12, this is not all inclusive as a manually curated dataset.
+While the dataset cutoff is 2026/05/12, this is not all-inclusive as a manually curated dataset.
 
 ### What is filtered
 - Works that directly expresses the intent to not be used for AI training
-  - "No AI" disclaimers or Poisoned images
-  - Both are avoided to respect artists intent with their creations
+  - "No AI" disclaimers or Poisoned images - both are avoided to respect artists intent with their creations
 - AI Generated and Synthetic data
+  - Indirect distillation of another models outputs are not desired, so steps are taken to avoid this
   - Images with Booru tags "ai-assisted", "ai-generated" are automatically excluded
-  - Images that are visually obviously AI generated I have also filtered
-  - Indirect distillation of another output is not desired
-- Photo Realistic depictions of real people
+  - Images that are visually obviously AI generated are also filtered
+- Photo-realistic depictions of real people
   - With the exception of photo backgrounds with 2d compositing, sought to improve backgrounds quality
 - Images that would be considered low quality without having other valuable aspects, e.g.
   - A sketch of a well-represented character already known by most base models would not be included
@@ -124,7 +123,7 @@ Aesthetic modifiers:
 
 ### Image modification
 - Modifications to images are kept as minimal as possible.
-- Most only cropping images to remove negative space is applied.
+- Generally only cropping images to remove negative space is applied.
 Textual elements including artist signatures are generally preserved.
   - If these are labelled accurately, they should be a benefit to the models understanding and text rendering capabilities.
   - If an artist name is prompted in isolation, it is appropriate that their signature would also be generated if it is a prominent feature in their works.
@@ -133,7 +132,7 @@ Textual elements including artist signatures are generally preserved.
 
 Images from Booru data sources have their full tags preserved.
 
-SmilingWolf/wd-eva02-large-tagger-v3 was used for additional image Booru style tagging.
+`SmilingWolf/wd-eva02-large-tagger-v3` was used for additional image Booru style tagging.
 
 Dataset tags are also used to generate an autosuggest csv file with [generate-csv-autosuggest.py](diffusion-pipe/anima/utils/generate-csv-autosuggest.py).
 
@@ -149,7 +148,8 @@ Two variants of natural language captions were generated for the full dataset us
 
 ## Dataset Partitioning - Stage 1
 
-This first stage contained the entire dataset of 42608, all images are partitioned into three folders by their total pixel areas using [partition-resolutions.py](/diffusion-pipe/anima/utils/partition-resolutions.py).
+This first stage contained the entire dataset totalling 42608 images.
+All images are partitioned into three folders by their total pixel areas using [partition-resolutions.py](/diffusion-pipe/anima/utils/partition-resolutions.py).
 
 - 512^2 - 512 images
 - 768^2 - 7008 images
@@ -181,7 +181,7 @@ Dropped at this stage:
 | unrated-old    | "date < 2025/10/01"                                                       | 6123   |
 | unrated-new    | "date > 2025/10/01"                                                       | 1328   |
 
-rated-new, rated-high, rated-masterpiece are kept, and rated-old, unrated-old, unrated-new are dropped.
+rated-new, rated-high, rated-masterpiece were kept, and rated-old, unrated-old, unrated-new were dropped.
 
 Again generated captions.json from `.txt` and `_nl*.txt` sidecar files in each new directory with with [generate-captions.py](/diffusion-pipe/anima/utils/generate-captions.py).
 
@@ -192,13 +192,15 @@ Again generated captions.json from `.txt` and `_nl*.txt` sidecar files in each n
 - `{filename}_nl.txt`
 - `{filename}_nl2.txt`
 
-Applied a dropout of 30% and shuffles tags into `dropout_tags1` and `dropout_tags2` keeping the first 8 tags, and a list of tags from a [protected.txt](/diffusion-pipe/anima/utils/protected-tags.txt) file.
+It applied a dropout of 30% and shuffles tags into `dropout_tags1` and `dropout_tags2` keeping the first 8 tags, and a list of tags from a [protected.txt](/diffusion-pipe/anima/utils/protected-tags.txt) file.
 
-This dropout, shuffle, and protected tag approach is adapted from @bluvoll fork of diffusion-pipe, which would apply the transformations at runtime.
+This dropout, shuffle, and protected tag approach is adapted from a [fork of diffusion-pipe by bluvoll](https://github.com/bluvoll/diffusion-pipe), which would apply the transformations at runtime.
 
 It is adapted this way to use `captions.json` which was intended to allow for:
-- captions pre-caching, shifting the performance overhead to memory limitation and caching time
+- pre-caching captions, shifting the performance overhead to memory limitation and caching time
 - no required changes/fork of the diffusion-pipe repository
+
+The resulting `captions.json` structure appears as below:
 
 ```json
 {
