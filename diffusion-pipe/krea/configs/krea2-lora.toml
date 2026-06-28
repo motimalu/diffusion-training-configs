@@ -1,0 +1,50 @@
+# trained using diffusion-pipe
+# NCCL_P2P_DISABLE="1" NCCL_IB_DISABLE="1" NCCL_CUMEM_ENABLE="0" deepspeed --num_gpus=1 train.py --deepspeed --config krea2-lora.toml
+
+output_dir = '/krea2/training_output/krea2-masterpieces'
+
+dataset = 'krea2-dataset.toml'
+
+# training settings
+epochs = 4
+micro_batch_size_per_gpu = 6
+pipeline_stages = 1
+gradient_accumulation_steps = 1
+gradient_clipping = 1
+warmup_steps = 150
+lr_scheduler = 'cosine'
+
+# misc settings
+save_every_n_epochs = 1
+activation_checkpointing = true
+
+partition_method = 'parameters'
+
+save_dtype = 'bfloat16'
+caching_batch_size = 1
+map_num_proc = 8
+steps_per_print = 1
+compile = true
+
+[model]
+type = 'krea2'
+diffusion_model = '/comfyui-models/models/diffusion_models/krea2_raw_bf16.safetensors'
+vae = '/comfyui-models/models/vae/qwen_image_vae.safetensors'
+text_encoders = [
+    {path = '/comfyui-models/models/text_encoders/qwen3vl_4b_bf16.safetensors', type = 'krea2'}
+]
+dtype = 'bfloat16'
+diffusion_model_dtype = 'float8'
+timestep_sample_method = 'logit_normal'
+
+[adapter]
+type = 'lora'
+rank = 32
+dtype = 'bfloat16'
+
+[optimizer]
+type = 'adamw_optimi'
+lr = 4e-5
+betas = [0.9, 0.99]
+weight_decay = 0.01
+eps = 1e-8

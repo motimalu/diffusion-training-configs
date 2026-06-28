@@ -1,0 +1,23 @@
+resolutions = [1024, 768, 512]
+
+enable_ar_bucket = true
+min_ar = 0.5
+max_ar = 2.0
+num_ar_buckets = 9
+
+# 384 Total images
+
+# 153 images
+[[directory]]
+path = '/training_data/0_masterpieces_kirazuri/1536x1536'
+resolutions = [1024, 768, 512]
+
+# # 43 images
+[[directory]]
+path = '/training_data/0_masterpieces_kirazuri/1280x1280'
+resolutions = [1024, 768, 512]
+
+# # 188 images
+[[directory]]
+path = '/training_data/0_masterpieces_kirazuri/1024x1024'
+resolutions = [1024, 768, 512]
