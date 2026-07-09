@@ -80,10 +80,10 @@ def generate_captions_json(directory_path="."):
                         dropout_tags1 = ', '.join(anchor_tags + dropped_tail1)
                         dropout_tags2 = ', '.join(anchor_tags + dropped_tail2)
                         captions.extend([
-                            f"{tags_full}.\n{nl_caption}",
                             f"{first_n_tags}.\n{nl_caption_v2}",
-                            f"{dropout_tags1}.\n{nl_caption}",
-                            f"{nl_caption_v2}\n{dropout_tags2}"
+                            f"{nl_caption_v2}\n{dropout_tags1}",
+                            f"{nl_caption}\n{dropout_tags2}"
+                            f"{tags_full}.\n{nl_caption}",
                         ])
 
                     captions_data[image_filename] = captions
