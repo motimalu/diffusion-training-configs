@@ -1,0 +1,47 @@
+# trained using diffusion-pipe commit c1239b532031e6621fbd90aaac1c77ba99693bc3
+
+output_dir = '/mnt/spica/anima/training_output/kirazuri-anima-4'
+
+dataset = 'dataset-partition-v4-s2.toml'
+
+# training settings
+epochs = 3
+# Per-resolution batch sizes
+micro_batch_size_per_gpu = [[512, 64], [1024, 24], [1536, 12]]
+pipeline_stages = 1
+gradient_accumulation_steps = 1
+gradient_clipping = 1
+# 5 percent of total 39054 steps
+warmup_steps = 1952
+lr_scheduler = 'cosine'
+
+# misc settings
+save_every_n_epochs = 1
+checkpoint_every_n_epochs = 1
+activation_checkpointing = true
+
+partition_method = 'parameters'
+
+save_dtype = 'bfloat16'
+caching_batch_size = 4
+map_num_proc = 8
+steps_per_print = 1
+compile = true
+
+[model]
+type = 'anima'
+transformer_path = '/home/hoshino/workspace/ComfyUI/models/diffusion_models/anima-kirazuri-v3-s1-e2.safetensors'
+vae_path = '/home/hoshino/workspace/ComfyUI/models/vae/qwen_image_vae.safetensors'
+llm_path = '/home/hoshino/workspace/ComfyUI/models/text_encoders/qwen_3_06b_base.safetensors'
+dtype = 'bfloat16'
+llm_adapter_lr = 2e-7
+# flux_shift = true
+# multiscale_loss_weight = 0.5
+sigmoid_scale = 1.3
+
+[optimizer]
+type = 'adamw_optimi'
+lr = 2e-6
+betas = [0.9, 0.99]
+weight_decay = 0.01
+eps = 1e-8

@@ -1,0 +1,45 @@
+resolutions = [512, 1024, 1536]
+
+enable_ar_bucket = true
+min_ar = 0.5
+max_ar = 2.0
+num_ar_buckets = 9
+
+# Total images = 18509
+
+# 18509 images, 8 repeats from captions.json, 3 resolutions
+
+# 18509*8 148072 samples/resolution/epoch
+
+# 2314+6060+4644 = 13018 steps/epoch
+
+# 512 Resolution: (330+11213+6966)*8 = 148072 samples / 64 batch size = 2314 steps
+# - iter time (s): 4.6*2314 = 2.95 hr / epoch
+
+# 1024 Resolution: (11213+6966)*8 = 145432 samples / 24 batch size = 6060 steps
+# - iter time (s): 6.482*6060 = 10.91 hr / epoch
+
+# 1536 Resolution: 6966*8 = 55728 samples / 12 batch size = 4644 steps
+# - iter time (s): 4.837*4644 = 6.23 hr / epoch
+
+# Total 2.95+10.91+6.23 = 20.09 hr/epoch, max VRAM utilization ~71 GB
+
+# Total Samples seen(unbatched steps): (55728+145432+148072)*3 = ~1,047,696
+
+# 330 entries
+[[directory]]
+path = '/mnt/spica/training_data/1_collection_name31/512x512'
+mask_path = '/mnt/spica/training_data/1_collection_name31_masks'
+resolutions = [512]
+
+# 11213 entries
+[[directory]]
+path = '/mnt/spica/training_data/1_collection_name31/1024x1024'
+mask_path = '/mnt/spica/training_data/1_collection_name31_masks'
+resolutions = [512, 1024]
+
+# 6966 entries
+[[directory]]
+path = '/mnt/spica/training_data/1_collection_name31/1536x1536'
+mask_path = '/mnt/spica/training_data/1_collection_name31_masks'
+resolutions = [512, 1024, 1536]
