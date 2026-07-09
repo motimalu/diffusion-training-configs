@@ -3,7 +3,7 @@
 
 Kirazuri (Anima) 4.0 is a full fine-tune of the [Anima Base v1.0 model by CircleStone Labs](https://huggingface.co/circlestone-labs/Anima/blob/main/split_files/diffusion_models/anima-base-v1.0.safetensors)
 
-This 4.0 version is trained from the Stage 1 checkpoint used for version 3.0, repeating only the Stage 2 training with several differences:
+This 4.0 version is trained from the Stage 1 checkpoint [anima-kirazuri-v3-s1-e2.safetensors](https://huggingface.co/motimalu/kirazuri-anima/blob/main/split_files/diffusion_models/anima-kirazuri-v3-s1-e2.safetensors) used for version 3.0, repeating only the Stage 2 training with several differences:
 
 - Updated dataset with cutoff of **29/06/2026**
 - Revised training hyper-parameters
