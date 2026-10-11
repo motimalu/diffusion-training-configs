@@ -1,0 +1,59 @@
+resolutions = [512, 768, 1024]
+
+enable_ar_bucket = true
+min_ar = 0.5
+max_ar = 2.0
+num_ar_buckets = 9
+
+# Total images = 50,739 (49,879 base + 860 in 0_update)
+# Total entries (images*resolutions) = 78,055
+# Repeats from captions.json = 6
+# Total samples/epoch = 78,055 entries*6 = 468,330
+# Average Throughput: ~0.69-0.91 samples/sec (mixed 512/768/1024)
+# 142.5 h/Epoch (5 days, 22 hours, 31 minutes)
+# Optimizer steps (16/8/4): 19,027 + 4,364 + 32,245 = ~55,636/epoch
+
+# 858 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/512x512'
+resolutions = [512]
+
+# 7772 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/768x768'
+resolutions = [512]
+
+# 14786 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1024x1024'
+resolutions = [512]
+
+# 7 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/0_update/512x512'
+resolutions = [512]
+
+# 384 entries (x2 768)
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/0_update/768x768'
+resolutions = [512, 768]
+
+# 469 entries (x2 938)
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/0_update/1024x1024'
+resolutions = [512, 1024]
+
+# 5435 entries (x2 10870)
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/768x768-rated'
+resolutions = [512, 768]
+
+# 11047 entries (x2 22094)
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1024x1024-rated'
+resolutions = [512, 1024]
+
+# 9981 entries (x2 19962)
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1024x1024-rated-high'
+resolutions = [512, 1024]

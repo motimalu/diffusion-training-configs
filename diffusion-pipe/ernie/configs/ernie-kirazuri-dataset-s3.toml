@@ -1,0 +1,31 @@
+resolutions = [1024]
+
+enable_ar_bucket = true
+min_ar = 0.5
+max_ar = 2.0
+num_ar_buckets = 9
+
+# Total images = 469 + 129 + 11047 + 9981 = 21626
+# Total entries (images*resolutions) = 21626
+# Repeats from captions.json = 6
+# Total samples/epoch = 21629 * 6 = 129756
+
+# 129 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1_update/'
+resolutions = [1024]
+
+# 469 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/0_update/1024x1024'
+resolutions = [1024]
+
+# 11047 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1024x1024-rated'
+resolutions = [1024]
+
+# 9981 entries
+[[directory]]
+path = '/home/vega/training_data/1_collection_name4/1024x1024-rated-high'
+resolutions = [1024]
